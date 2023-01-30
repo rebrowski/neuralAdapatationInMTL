@@ -1,9 +1,13 @@
 
-clearvars -except sessions
+clearvars -except sessions eeg datadir % do not clear the large variables if they are already loaded as this takes a few minutes
+%% load things, set paths if necessary
+if ~exist('datadir', 'var')
+    startup
+end
 
 %% this script loads the raw data (sessions.mat) and aggregates relevant behavioral data 
 if ~exist('sessions', 'var')
-    load('~/projects/ospr/secondlevel/sessions.mat'); % this may take a while as sessions.mat is 4.7 GB
+    load([datadir filesep 'sessions.mat']); % this may take a while as sessions.mat is 4.7 GB
 end
 
 %% Basic Parameters

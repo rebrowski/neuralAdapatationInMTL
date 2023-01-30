@@ -1,9 +1,13 @@
 %% this script loads segmented EEG data an plots Figure 1C
 
-clearvars -except sessions eeg % do not clear the large variables if they are already loaded as this takes a few minutes
+clearvars -except sessions eeg datadir % do not clear the large variables if they are already loaded as this takes a few minutes
+%% load things, set paths if necessary
+if ~exist('datadir', 'var')
+    startup
+end
 
 %% path to data % load
-eegname = '~/projects/ospr/secondlevel/ieeg_linked_mastoids_256Hz.mat'; % adjust this to your situation
+eegname = [datadir filesep 'ieeg_linked_mastoids_256Hz.mat']; % adjust this to your situation
 if ~exist('eeg', 'var')
     load(eegname); %loads var eeg into the workspace
 end
