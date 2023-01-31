@@ -1,8 +1,8 @@
-%% this scripts calculates for each neuronal response according the
-% binwise ranksum test a latency value for pthe primed and control
-% condition
-
-clearvars -except sessions
+clearvars -except sessions eeg datadir stimdir% do not clear the large variables if they are already loaded as this takes a few minutes
+%% load things, set paths if necessary
+if ~exist('datadir', 'var')
+    startup
+end
 
 if ~exist('sessions', 'var')
     load sessions;
@@ -13,25 +13,19 @@ minResponsesPerUnit = 4; % in both primed & control condition
 segstartstop = [100 1000]; % for latency analyses
 doplot = false; % dont plot when calling response_latency;
 
-%% load binwise ranksum results per condition:
-%pr = load('priming_responses.mat');
-
-%% load binwise signed rank for p/c collapsed
+%% load responses
 cr = load('category_responses.mat');
 
-%% load spikewidht/ pyrInt classification 
-sw = load('ospr_spikewidth.mat');
+% get units that significantly respond to four or more stimuli
+%respondingInBoth=(pr.consider_rs(:,:,1) & pr.consider_rs(:,:,2));
+%uidx =  sum(respondingInBoth, 2) >= minResponsesPerUnit;
+uidx = sum(cr.consider_rs,2) >= minResponsesPerUnit; % p/c combined;
 
-% get units that significantly respond to primed AND control trials
-% respondingInBoth=(pr.consider_rs(:,:,1) & pr.consider_rs(:,:,2));
-% uidx =  sum(respondingInBoth, 2) >= minResponsesPerUnit;
 
-uidx = 
-
-disp(sprintf(['found %d repsonses that in units least %d responses ' ...
-              'which are significant during both, primed & control condition'], sum(sum(respondingInBoth)), minResponsesPerUnit));
-disp(sprintf(['these responses are found in  %d units, i.e., %.2f responses per unit on average '], ...
-             sum(uidx), sum(sum(respondingInBoth))/sum(uidx)));
+%disp(sprintf(['found %d repsonses that in units least %d responses ' ...
+%              'which are significant during both, primed & control condition'], sum(sum(respondingInBoth)), minResponsesPerUnit));
+%disp(sprintf(['these responses are found in  %d units, i.e., %.2f responses per unit on average '], ...
+%             sum(uidx), sum(sum(respondingInBoth))/sum(uidx)));
 
 %% loop over units with responses in both and calculate latency
 nunits = sum(uidx);
@@ -41,10 +35,6 @@ aggregatebslfr = NaN(nunits);
 
 latlookup.region = {};
 latlookup.isInterneuron = []; 
-
-% celltype_ison_crit2 = (spikewidth > 0.6) + 1;
-% 1: interneurons
-% 2: principal cells, 
 latlookup.bslfr = [];
 latlookup.method = {};
 
@@ -57,9 +47,9 @@ for u = 1:nunits
     
     % get index to unit in sessions
     clusid = fuidx(u);    
-    sessid = pr.cluster_lookup.sessid(clusid);
-    channo = pr.cluster_lookup.channo(clusid);
-    classno = pr.cluster_lookup.clusid(clusid);
+    sessid = cr.cluster_lookup.sessid(clusid);
+    channo = cr.cluster_lookup.channo(clusid);
+    classno = cr.cluster_lookup.clusid(clusid);
     
     cherryno = find([sessions(sessid).cherries(:).channr] == channo & ...
         [sessions(sessid).cherries(:).classno] == classno);
@@ -67,10 +57,11 @@ for u = 1:nunits
     assert(numel(cherryno) == 1)
             
     % get stimuli indices
-    ir = find(respondingInBoth(clusid, :));
-    stimnames = pr.stim_lookup(ir);
+    %ir = find(respondingInBoth(clusid, :));
+    ir = find(cr.consider_rs(clusid, :));
+    stimnames = cr.stim_lookup(ir);
     
-    % init BOB and his friends 
+    % init output for p_burst
     BOB = [];
     EOB = [];
     SOB = [];
@@ -117,8 +108,7 @@ for u = 1:nunits
     end
     
     % save lookup vars
-    latlookup.region{u} = pr.cluster_lookup.regionname{clusid};
-    latlookup.isInterneuron(u) = sw.celltype_ison_crit2(clusid);
+    latlookup.region{u} = cr.cluster_lookup.regionname{clusid};
     latlookup.bslfr(u) = nanmedian(nanmedian([allbslfr{u,:,:}]));
 end
 

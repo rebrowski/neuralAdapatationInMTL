@@ -1,4 +1,4 @@
-clearvars -except sessions eeg datadir % do not clear the large variables if they are already loaded as this takes a few minutes
+clearvars -except sessions eeg datadir stimdir% do not clear the large variables if they are already loaded as this takes a few minutes
 %% load things, set paths if necessary
 if ~exist('datadir', 'var')
     startup
