@@ -5,7 +5,7 @@ if ~exist('datadir', 'var')
 end
 
 if ~exist('sessions', 'var')
-    load sessions;
+    load([datadir filesep 'sessions.mat']);
 end
 tic
 %% params
@@ -112,7 +112,7 @@ for u = 1:nunits
     latlookup.bslfr(u) = nanmedian(nanmedian([allbslfr{u,:,:}]));
 end
 
-disp(sprintf('took %.2f Minutes', toc/60));
+disp(sprintf('took %.2f hours', toc/3600));
 
 save(sprintf('priming_latencies_min%dresponsesperunit.mat', minResponsesPerUnit), ...
      'aggregatelatencies', ...

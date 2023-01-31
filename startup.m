@@ -7,6 +7,6 @@ stimdir = '~/scripts/neuralAdapatationInMTL/stimuli/'; % folder with images cont
 % like the iEEG traces (ieeg_linked_mastoids_256Hz.mat) and single unit data (sessions.mat)
 datadir = '~/projects/ospr/secondlevel/'; 
 if isunix
-    datadir = '~/media/treber/neuralAdapatationInMTL/';
+    datadir = '/media/treber/neuralAdaptationInMTL';
 end
 
