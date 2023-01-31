@@ -4,11 +4,15 @@ if ~exist('datadir', 'var')
     startup
 end
 
-minResponsesPerUnit = 4;
+minResponsesPerUnit = 1;
 load(sprintf('priming_latencies_min%dresponsesperunit.mat', ...
              minResponsesPerUnit));
 
-load('regions.mat');
+regions(1).name = 'AM';
+regions(2).name = 'EC';
+regions(3).name = 'HC';
+regions(4).name = 'PHC';
+nregions = numel(regions);
 
 %% plot latencies
 for fi = 1:2
@@ -18,12 +22,12 @@ for fi = 1:2
     if fi == 1
         measure = aggregatelatencies;
         keepidx = 1:size(aggregatelatencies,1);
-        figprefix = 'latency_';
+        figprefix = 'Figure2D_Latency';
         ylabeltext = 'Latency (ms)';
     else
         measure = aggregatedurations;
         keepidx = [measure(:,1)>1 & measure(:,2) > 1]';
-        figprefix = 'responseduration_';
+        figprefix = 'Figure2C_BurstDuration';
         ylabeltext = 'Burst-Duration (ms)';
     end
 
@@ -109,7 +113,7 @@ for fi = 1:2
     cond = [repmat(1, numel(measure(pidx,1)), 1); ...
             repmat(2, numel(measure(pidx,1)), 1)];
 
-keyboard
+
     [y,x,g] = iosr.statistics.tab2box(reg, lat,  cond);
 
 
@@ -118,7 +122,7 @@ keyboard
                                 'groupLabels',g,'showLegend',true, ...
                                 'theme', 'colorlines', ... %'colorall' 'default'
                                 'sampleSize', false, ...
-                                'showLegend', true, ...
+                                'showLegend', false, ...
                                 'notch', false, ...
                                 'outlierSize', 4, ...
                                 'symbolMarker', 'x',...
@@ -129,21 +133,16 @@ keyboard
                                 'lineWidth', 0.3 ...
                                 );
 
-    h.handles.axes.Legend.String{1} = 'primed';
-    h.handles.axes.Legend.String{2} = 'control';
-    h.handles.axes.Legend.Box = 'off';
+ 
     ylabel(ylabeltext);
-
+    if fi == 1
+        ylim([0 800]);
+    else
+        ylim([0 500]);
+    end
     suptitle(sprintf('Min. %d Responses per Unit', minResponsesPerUnit))
 
-    print(figh, sprintf('%s_primed_vs_control_min%d_resps_per_unit.png', ...
+    print(figh, sprintf('%s_primed_vs_control_%d_resps.png', ...
                         figprefix, minResponsesPerUnit), '-dpng', '-r600');
 
 end
-
-%%% analyze durations
-% $$$ minduration = 1;
-% $$$ idx = sum(aggregatedurations > minduration, 2) == 2;
-% $$$ 
-% $$$ nunits = sum(idx)
-
