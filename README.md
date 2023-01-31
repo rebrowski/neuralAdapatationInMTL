@@ -9,9 +9,13 @@
 It is assumed that there is directory to the data, one for the scripts in this repo, and one for the abovementioned `common_analysis_scripts`. To adjust these paths to your situation, edit `startup.m` and run it once at startup of matlab.
 
 ## Behavioral Results & Figure 1B
-1. running `BehaviorAggregate.m` will generate the file `reactiontimes_primed_control_category.mat`.
-2. running `BehaviorAnalysesAndPlots.m` will output stats in the MATALB prompt and generate `Figure1B.png`.
+1. `BehaviorAggregate.m` generates the file `reactiontimes_primed_control_category.mat`.
+2. `BehaviorAnalysesAndPlots.m` outputs stats in the MATALB prompt and generate `Figure1B.png`.
 
 ## iEEG ERPs
-1. running `ERPsPlotfigure1C.m` will generate the figure `Figure1B.png`
-2. running `ERPsLatencyAnalysesSITable1.m` will print output to terminal that was used for Supporting Information Table 1. 
+1. `ERPsPlotfigure1C.m` generates the figure `Figure1C.png`
+2. `ERPsLatencyAnalysesSITable1.m` prints output to terminal that was used for Supporting Information Table 1. 
+
+## Single units tuning curves
+1. `CalculateTuningCurves.m` generates `tuningCurvesMin[N]ResponsesPerUnit.mat` where `N`is the minimun number of stimuli the unit responds to.
+2. `Figure2BPlotTuningCurves.m` generates  `Figure2BTuningCurvesMin[N]Resps.png` where `N`is the minimun number of stimuli the unit responds to. Note `N = 4` was used for Figure 2B.

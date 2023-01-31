@@ -17,7 +17,7 @@ nsessions = numel(eeg);
 alpha = 0.01;
 clusteralpha = 0.001;
 nperms = 1000;
-erpoutfn = 'ERPsFigure';
+
 
 %% definition of recording sites in anatomical regions
 regions(1).ieegsites = {'AL', 'AR'};% Amygdalae
@@ -125,5 +125,5 @@ end
 set(findall(gcf,'type','text'),'FontSize',fontSize);%,'fontWeight','normal');
 set(findall(0,'type','axes'),'FontSize',fontSize)%,'fontWeight','normal');
 
-print(figh, erpoutfn, '-dpng', '-r600')
+print(figh,'Figure1C', '-dpng', '-r600')
 
