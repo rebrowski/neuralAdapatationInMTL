@@ -19,3 +19,5 @@ It is assumed that there is directory to the data, one for the scripts in this r
 ## Single units tuning curves
 1. `CalculateTuningCurves.m` generates `tuningCurvesMin[N]ResponsesPerUnit.mat` where `N`is the minimun number of stimuli the unit responds to.
 2. `Figure2BPlotTuningCurves.m` generates  `Figure2BTuningCurvesMin[N]Resps.png` where `N`is the minimun number of stimuli the unit responds to. Note `N = 4` was used for Figure 2B.
+3. `PrepareTuningCurvesDataForSpss.m` generates `FiringRatesByRankCondition.csv`, which re-arranges the data in `tuningCurvesMin4ResponsesPerUnit.mat` long format to be further processed wiht SPSS or R for ANOVAs.
+4. `firingRatesByRankCondition.sps` is an SPSS script file that does the Condition (primed, control) X Stimulus Rank (1,2,3,4) X Anatomical Region (AM, otherMTL) ANOVA on z-scored and raw firing rates reported in the main text and in Supplementary Table 2. It loads `FiringRatesByRankCondition.csv` and stores the output in SPSS viewer file (`FiringRatesByRankCondition.spv`).
