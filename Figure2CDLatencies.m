@@ -4,9 +4,7 @@ if ~exist('datadir', 'var')
     startup
 end
 
-minResponsesPerUnit = 1;
-load(sprintf('priming_latencies_min%dresponsesperunit.mat', ...
-             minResponsesPerUnit));
+load('priming_latencies.mat');
 
 regions(1).name = 'AM';
 regions(2).name = 'EC';
@@ -140,9 +138,7 @@ for fi = 1:2
     else
         ylim([0 500]);
     end
-    suptitle(sprintf('Min. %d Responses per Unit', minResponsesPerUnit))
-
-    print(figh, sprintf('%s_primed_vs_control_%d_resps.png', ...
-                        figprefix, minResponsesPerUnit), '-dpng', '-r600');
+    print(figh, sprintf('%s_primed_vs_control.png', ...
+                        figprefix), '-dpng', '-r600');
 
 end
