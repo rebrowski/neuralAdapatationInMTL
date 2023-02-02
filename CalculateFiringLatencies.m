@@ -9,7 +9,7 @@ if ~exist('sessions', 'var')
 end
 tic
 %% params
-minResponsesPerUnit = 4; % in both primed & control condition
+minResponsesPerUnit = 1; % do this for units firing to at least one image
 segstartstop = [100 1000]; % for latency analyses
 doplot = false; % dont plot when calling response_latency;
 
