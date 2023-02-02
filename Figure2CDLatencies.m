@@ -138,7 +138,7 @@ for fi = 1:2
     else
         ylim([0 500]);
     end
-    print(figh, sprintf('%s_primed_vs_control.png', ...
-                        figprefix), '-dpng', '-r600');
+    print(figh, sprintf('%s%s%s_primed_vs_control.png', ...
+                        'plots', filesep, figprefix), '-dpng', '-r600');
 
 end

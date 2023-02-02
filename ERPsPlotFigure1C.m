@@ -125,5 +125,5 @@ end
 set(findall(gcf,'type','text'),'FontSize',fontSize);%,'fontWeight','normal');
 set(findall(0,'type','axes'),'FontSize',fontSize)%,'fontWeight','normal');
 
-print(figh,'Figure1C', '-dpng', '-r600')
+print(figh,['plots', filesep, 'Figure1C'], '-dpng', '-r600')
 

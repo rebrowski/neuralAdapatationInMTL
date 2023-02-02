@@ -21,7 +21,7 @@ zc = load('zvals_condition');
 for cid = 1:numel(cellids)
     cellid = cellids(cid);
 
-    outfn = sprintf('%s%sospr_su_example_%d_%s', 'su_examples', filesep, cellid, cr.cluster_lookup{cellid,'sitename'}{1}); 
+    outfn = sprintf('%s%sospr_su_example_%d_%s', 'plots', filesep, cellid, cr.cluster_lookup{cellid,'sitename'}{1}); 
 
     figh = figure('color', 'w', 'visible', 'off');
     figh.PaperUnits = 'inches';

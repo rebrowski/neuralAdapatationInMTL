@@ -88,4 +88,4 @@ plot([1,2],[1300, 1300], '-k');
 
 linkaxes([ax1, ax2], 'y');
 
-print(h1, 'Figure1B.png', '-dpng');
+print(h1, ['plots', filesep, 'Figure1B.png'], '-dpng');
