@@ -5,9 +5,13 @@ stimdir = '~/scripts/neuralAdapatationInMTL/stimuli/'; % folder with images cont
 
 % path to large datafiles that need to be downloaded separately 
 % like the iEEG traces (ieeg_linked_mastoids_256Hz.mat) and single unit data (sessions.mat)
-datadir = '~/projects/ospr/secondlevel/'; 
 if isunix
     datadir = '/media/treber/neuralAdaptationInMTL';
+end
+
+% isunix returns "true" also for mac, so
+if ismac
+    datadir = '~/projects/ospr/secondlevel/'; 
 end
 
 P_W_D = pwd;
