@@ -97,7 +97,7 @@ toi = find(eeg(1).stime > to, 1, 'first' );
 
 figh = figure('color', 'w', 'visible', 'on');
 figh.PaperUnits = 'inches';
-figh.PaperPosition = [0 0 3.7 9.2];
+figh.PaperPosition = [0 0 4.2 9.2];
 % display it somewhat similar to what will be plotted
 figh.Position = [200 200  figh.PaperPosition(3)*150 figh.PaperPosition(4)*150];
 fontSize = 8;
@@ -117,13 +117,21 @@ for regi = 1:nregions
         set(handles(end), 'Location','best')
     end
     colormap(cbhandle, flipud(hot));
-    xlabel(handles(1), '');
-    ylabel(handles(1), 'Amplitude (mV)');
+    cbh = colorbar(cbhandle);
+    cbh.Position(1) = cbh.Position(1) + 0.08;
+    cbh.Ticks = [0 0.2];
+    cbh.TickLabels = {'0', '0.2'};
+    cbh.Label.String = 'p';
+    cbh.Label.Rotation = 0;
+    cbh.Label.Position = [0.5 0.5 0];
+    lbh = xlabel(handles(1), 'milliseconds');
+    %if regi == 4 
+    lbh.Position(2)= lbh.Position(2)-6;
+    ylabel(handles(1), 'ERP amplitude (mV)');
     title(handles(1),regions(regi).name);
 end
 
 set(findall(gcf,'type','text'),'FontSize',fontSize);%,'fontWeight','normal');
 set(findall(0,'type','axes'),'FontSize',fontSize)%,'fontWeight','normal');
-
 print(figh,['plots', filesep, 'Figure1C'], '-dpng', '-r600')
 
