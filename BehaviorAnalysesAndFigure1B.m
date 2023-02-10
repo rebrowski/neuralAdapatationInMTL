@@ -1,10 +1,9 @@
-clearvars -except sessions
-
-secondleveldir = '~/projects/ospr/secondlevel/';
-% load behavior data, vars with _sr at the end are restricted to trials in
-% which the prime in the control condtiion afforded the same response as
-% the target (ie., was of a different category, but same meta-category)
-load([secondleveldir, 'reactiontimes_primed_control_category.mat']);
+clearvars -except sessions eeg datadir stimdir% do not clear the large variables if they are already loaded as this takes a few minutes
+%% load things, set paths if necessary
+if ~exist('datadir', 'var')
+    startup
+end
+load([datadir, filesep, 'reactiontimes_primed_control_category.mat']);
 
 %% 1. calcuate average over categories per session
 
@@ -34,6 +33,10 @@ for s = 1:numel(subid_wide)
     t.pc_sr = [t.pc_sr; median(pcorrcat_wide_sr(s, :, 2), 'omitnan')*100];
 
 end
+
+%% write source data file as requested by n comms
+t1bc = struct2table(t);
+writetable(t1b, ['source_data_files_ncomms', filesep, 'SourceDataFigure1B.xlsx']);
 
 %% print stats to console
 primedIdx = strcmp(t.cond, 'primed');

@@ -106,14 +106,28 @@ for fi = 1:2
     %rearrange data for iosr
     pidx = find(~strcmp('other', latlookup.region) & keepidx);
 
-    lat = [measure(pidx,1); measure(pidx,2)];
-    reg = [latlookup.region(pidx), latlookup.region(pidx)]';
-    cond = [repmat(1, numel(measure(pidx,1)), 1); ...
+    
+    t1.region = [latlookup.region(pidx), latlookup.region(pidx)]';
+    t1.condition = [repmat(1, numel(measure(pidx,1)), 1); ...
             repmat(2, numel(measure(pidx,1)), 1)];
+    t1.cellid = [1:numel(measure(pidx,1)),1:numel(measure(pidx,1))]';
 
+    % save output in sourve data file for ncomms
+    if fi == 1
+        sourceDataFileName = ['source_data_files_ncomms', filesep, 'SourceDataFigure2D.xlsx'];
+        t1.latency = [measure(pidx,1); measure(pidx,2)];
+         % plot using iosr
+    [y,x,g] = iosr.statistics.tab2box(t1.region, t1.latency, t1.condition);
 
-    [y,x,g] = iosr.statistics.tab2box(reg, lat,  cond);
+    elseif fi == 2
+        sourceDataFileName = ['source_data_files_ncomms', filesep, 'SourceDataFigure2C.xlsx'];
+        t1.duration = [measure(pidx,1); measure(pidx,2)];
+            [y,x,g] = iosr.statistics.tab2box(t1.region, t1.duration, t1.condition);
 
+    end
+    writetable(struct2table(t1), sourceDataFileName);
+    clear t1
+   
 
     h = iosr.statistics.boxPlot(x,y,...
                                 'scalewidth',false,'xseparator',false,...

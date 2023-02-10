@@ -1,4 +1,4 @@
-%% this script loads segmented EEG data an plots Figure 1C
+ %% this script loads segmented EEG data an plots Figure 1C
 
 clearvars -except sessions eeg datadir % do not clear the large variables if they are already loaded as this takes a few minutes
 %% load things, set paths if necessary
@@ -110,7 +110,20 @@ for regi = 1:nregions
                          squeeze(erp(regi).dat(:,2,fromi:toi)) .* -1, ...
                nperms,clusteralpha, alpha, eeg(1).stime(fromi:toi), condcolors, {'primed', ...
                         'control'}, gca, 5);
-
+    
+    % TBD: store data in table for ncomms    
+    timeax = eeg(1).stime(fromi:toi);
+    datprimed = squeeze(erp(regi).dat(:,1,fromi:toi)) .* -1;
+    datcontrol = squeeze(erp(regi).dat(:,2,fromi:toi)) .* -1;
+ 
+    %condition = [repmat({'primed ERP'}, size(datprimed,1), 1); repmat({'control ERP'}, size(datcontrol,1),1)]   
+    t = array2table([datprimed; datcontrol]);
+    t.condition = [repmat({'primed ERP'}, size(datprimed,1), 1); repmat({'control ERP'}, size(datcontrol,1),1)];
+    vl = strcat(cellstr(num2str(floor(timeax)'))', ' ms');
+    t.Properties.VariableNames = [vl, 'condition'];
+    tablename = ['source_data_files_ncomms', filesep, 'SourceDataFigure1C.xlsx'];
+    writetable(t, tablename, 'Sheet', regions(regi).name); 
+    
     if regi > 1
         set(handles(end), 'visible','off'); % this is the legend
     else

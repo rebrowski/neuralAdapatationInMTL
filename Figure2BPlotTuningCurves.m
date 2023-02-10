@@ -23,6 +23,16 @@ subplot(1,2,1);
 idx = strcmp(cluster_infos.regionname, 'AM');
 nsu = sum(strcmp('SU', cluster_infos{idx, 'clustype'}));
 PlotTuning(tc, idx, xl, xt, yl, yt, alphacrit)
+
+% save things into source data file for ncomms
+sourceDataFileName = ['source_data_files_ncomms', filesep, 'SourceDataFigure2B.xlsx'];
+t1.data = [tc(idx,1:xl(2), 1);tc(idx,1:xl(2),2)];
+t1.condlabels = repmat({'primed'}, sum(idx), 1);
+t1.condlabels = [t1.condlabels;repmat({'control'}, sum(idx), 1)];
+t1.cellId = [1:sum(idx), 1:sum(idx)]';
+writetable(struct2table(t1), sourceDataFileName, 'Sheet', 'AM');
+
+% annotate the plot
 title(sprintf('%s (n=%d, %d SU)', 'AM', sum(idx), nsu));
 ylabel('^{FR}/_{FRmax}');
 xlabel('stim rank');
@@ -33,6 +43,14 @@ idx = strcmp(cluster_infos.regionname, 'HC') | ...
     strcmp(cluster_infos.regionname, 'PHC');
 nsu = sum(strcmp('SU', cluster_infos{idx, 'clustype'}));
 PlotTuning(tc, idx, xl, xt, yl, yt, alphacrit)
+
+t2.data = [tc(idx,1:xl(2), 1);tc(idx,1:xl(2),2)];
+t2.condlabels = repmat({'primed'}, sum(idx), 1);
+t2.condlabels = [t2.condlabels;repmat({'control'}, sum(idx), 1)];
+t2.cellId = [1:sum(idx), 1:sum(idx)]';
+writetable(struct2table(t2), sourceDataFileName, 'Sheet', 'HC-EC-PHC');
+
+
 title(sprintf('%s (n=%d, %d SU)', 'HC, EC, PHC', sum(idx), nsu));
 ylabel('');
 xlabel('');

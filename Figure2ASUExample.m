@@ -10,7 +10,7 @@ if ~exist('stimdir', 'var')
     startup
 end
 if ~exist('sessions', 'var')
-    load([datadir filsep 'sessions.mat']);
+    load([datadir filesep 'sessions.mat']);
 end
 
 %% load lookups
@@ -18,7 +18,7 @@ cr = load('category_responses.mat');
 zc = load('zvals_condition');
 
 %% loop through cells to plot
-for cid = 1:numel(cellids)
+for cid = 1%:numel(cellids)
     cellid = cellids(cid);
 
     outfn = sprintf('%s%sospr_su_example_%d_%s', 'plots', filesep, cellid, cr.cluster_lookup{cellid,'sitename'}{1}); 
@@ -60,6 +60,26 @@ for cid = 1:numel(cellids)
             conds = [conds repmat(cidx, 1, 5)];
             zscorestoplot(sidx, cidx) = zc.zvals(cellid,stimidx(sidx),cidx);
         end
+    end
+    % write SourceDataFile for ncomms
+    if cellid == 3628
+        sourceDataFileName = ['source_data_files_ncomms', filesep, 'SourceDataFigure2A.xlsx'];
+        
+       
+        for ti = 1:numel(trials)
+            t1.ConditionLabel(ti,1) = conds(ti);
+            t1.StimLabel(ti,1) = cr.stim_lookup(stims(ti));
+            for ns = 1:numel(trials{ti})
+                t1.timestamps(ti,ns) = trials{ti}(ns);
+            end
+        end
+        
+        writetable(struct2table(t1), sourceDataFileName, 'Sheet', 'SpikeTimeStamps');
+        t2.primedZscores = zscorestoplot(:,1);
+        t2.controlZscores = zscorestoplot(:,2);
+        t2.StimName = snames(1,:)';
+        writetable(struct2table(t2),sourceDataFileName, 'Sheet', 'Zscores');
+        
     end
 
     subplot(1,3,1)
