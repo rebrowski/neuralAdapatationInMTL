@@ -115,7 +115,12 @@ for regi = 1:nregions
     timeax = eeg(1).stime(fromi:toi);
     datprimed = squeeze(erp(regi).dat(:,1,fromi:toi)) .* -1;
     datcontrol = squeeze(erp(regi).dat(:,2,fromi:toi)) .* -1;
- 
+    disp('==================')
+    disp(sprintf('%d contacts in %s', size(datprimed,1), regions(regi).name));
+    disp('-----------------')
+    disp(k_);
+    disp(' ')
+
     %condition = [repmat({'primed ERP'}, size(datprimed,1), 1); repmat({'control ERP'}, size(datcontrol,1),1)]   
     t = array2table([datprimed; datcontrol]);
     t.condition = [repmat({'primed ERP'}, size(datprimed,1), 1); repmat({'control ERP'}, size(datcontrol,1),1)];

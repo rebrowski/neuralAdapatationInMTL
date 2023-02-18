@@ -36,27 +36,27 @@ end
 
 %% write source data file as requested by n comms
 t1bc = struct2table(t);
-writetable(t1b, ['source_data_files_ncomms', filesep, 'SourceDataFigure1B.xlsx']);
+writetable(t1bc, ['source_data_files_ncomms', filesep, 'SourceDataFigure1B.xlsx']);
 
 %% print stats to console
 primedIdx = strcmp(t.cond, 'primed');
 controlIdx = strcmp(t.cond, 'control');
 
-[P, H] = signrank(t.rt_all(primedIdx), t.rt_all(controlIdx)); 
-fprintf('Med(IQR) RT primed overall:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g\n', ...
-             median(t.rt_all(primedIdx)), iqr(t.rt_all(primedIdx)), median(t.rt_all(controlIdx)), iqr(t.rt_all(controlIdx)), P );
+[P, H, stats] = signrank(t.rt_all(primedIdx), t.rt_all(controlIdx)); 
+fprintf('Med(IQR) RT primed overall:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g, Z = %d\n', ...
+             median(t.rt_all(primedIdx)), iqr(t.rt_all(primedIdx)), median(t.rt_all(controlIdx)), iqr(t.rt_all(controlIdx)), P, stats.signedrank );
        
-[P, H] = signrank(t.rt_sr(primedIdx), t.rt_sr(controlIdx)); 
-fprintf('Med(IQR) RT primed same response:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g\n', ...
-             median(t.rt_sr(primedIdx)), iqr(t.rt_sr(primedIdx)), median(t.rt_sr(controlIdx)), iqr(t.rt_sr(controlIdx)), P );
+[P, H, stats] = signrank(t.rt_sr(primedIdx), t.rt_sr(controlIdx)); 
+fprintf('Med(IQR) RT primed same response:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g, Z = %d\n', ...
+             median(t.rt_sr(primedIdx)), iqr(t.rt_sr(primedIdx)), median(t.rt_sr(controlIdx)), iqr(t.rt_sr(controlIdx)), P, stats.signedrank );
 
-[P, H] = signrank(t.pc_all(primedIdx), t.pc_all(controlIdx)); 
-fprintf('Med(IQR) percent correct primed overall:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g\n', ...
-             median(t.pc_all(primedIdx)), iqr(t.pc_all(primedIdx)), median(t.pc_all(controlIdx)), iqr(t.pc_all(controlIdx)), P );
+[P, H, stats] = signrank(t.pc_all(primedIdx), t.pc_all(controlIdx)); 
+fprintf('Med(IQR) percent correct primed overall:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g, Z = %d\n', ...
+             median(t.pc_all(primedIdx)), iqr(t.pc_all(primedIdx)), median(t.pc_all(controlIdx)), iqr(t.pc_all(controlIdx)), P, stats.signedrank );
        
-[P, H] = signrank(t.pc_sr(primedIdx), t.pc_sr(controlIdx)); 
-fprintf('Med(IQR) percent correct primed same response:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g\n', ...
-             median(t.pc_sr(primedIdx)), iqr(t.pc_sr(primedIdx)), median(t.pc_sr(controlIdx)), iqr(t.pc_sr(controlIdx)), P );
+[P, H, stats] = signrank(t.pc_sr(primedIdx), t.pc_sr(controlIdx)); 
+fprintf('Med(IQR) percent correct primed same response:%.2f (%.2f), control %.2f (%.2f); signrank p = %.3g, Z = %d\n', ...
+             median(t.pc_sr(primedIdx)), iqr(t.pc_sr(primedIdx)), median(t.pc_sr(controlIdx)), iqr(t.pc_sr(controlIdx)), P, stats.signedrank );
 
 
 

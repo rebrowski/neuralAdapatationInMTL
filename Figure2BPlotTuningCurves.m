@@ -4,9 +4,9 @@ if ~exist('datadir', 'var')
     startup
 end
 
-min_n_re_stim = 4; % inclusion criterion for units responding to at least min_n_re_stimuli
+min_n_re_stim = 2; % inclusion criterion for units responding to at least min_n_re_stimuli
 load(sprintf('tuningCurvesMin%dResponsesPerUnit.mat', min_n_re_stim));
-
+disp(sprintf('Units with at least %d significant responses', min_n_re_stim));
 %% plotting params
 xl = [0.5, min_n_re_stim]; % how many responses per unit are considered
 xt = [1:1:xl(2)];
@@ -22,6 +22,7 @@ figh.PaperPosition = [0 0 7.4, 3.6];
 subplot(1,2,1);
 idx = strcmp(cluster_infos.regionname, 'AM');
 nsu = sum(strcmp('SU', cluster_infos{idx, 'clustype'}));
+disp('AM')
 PlotTuning(tc, idx, xl, xt, yl, yt, alphacrit)
 
 % save things into source data file for ncomms
@@ -42,6 +43,7 @@ idx = strcmp(cluster_infos.regionname, 'HC') | ...
     strcmp(cluster_infos.regionname, 'EC') | ...
     strcmp(cluster_infos.regionname, 'PHC');
 nsu = sum(strcmp('SU', cluster_infos{idx, 'clustype'}));
+disp('HC, EC, PHC')
 PlotTuning(tc, idx, xl, xt, yl, yt, alphacrit)
 
 t2.data = [tc(idx,1:xl(2), 1);tc(idx,1:xl(2),2)];
