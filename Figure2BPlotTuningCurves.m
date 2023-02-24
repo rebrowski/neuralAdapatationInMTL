@@ -4,7 +4,7 @@ if ~exist('datadir', 'var')
     startup
 end
 
-min_n_re_stim = 2; % inclusion criterion for units responding to at least min_n_re_stimuli
+min_n_re_stim = 4; % inclusion criterion for units responding to at least min_n_re_stimuli
 load(sprintf('tuningCurvesMin%dResponsesPerUnit.mat', min_n_re_stim));
 disp(sprintf('Units with at least %d significant responses', min_n_re_stim));
 %% plotting params
