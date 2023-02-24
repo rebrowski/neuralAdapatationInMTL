@@ -1,4 +1,7 @@
 %% Plot all figures
+
+% run this in the root of the neuarlAdaptationInMTL repository
+
 %% Fig 1 B
 BehaviorAggregate;
 BehaviorAnalysesAndFigure1B;
