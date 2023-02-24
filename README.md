@@ -1,8 +1,8 @@
 # Analysis-Scripts for ''Single-neuron mechanisms of neural adaptation in the human temporal lobe''
 
 ## Data & dependencies
-1. Sorted Spiking and behavioral data are stored in `sessions.mat` (~5GB)
-2. Segmented intracranial EEG traces are stored in `ieeg_linked_mastoids_256Hz.mat` (~5GB)  
+1. Sorted Spiking and behavioral data are stored in `sessions.mat` (~5GB, download here: [https://1drv.ms/u/s!Ar6O6_m2VBtAj712lxxl7UDK_yXFog?e=UFAwCN](https://1drv.ms/u/s!Ar6O6_m2VBtAj712lxxl7UDK_yXFog?e=UFAwCN))
+2. Segmented intracranial EEG traces are stored in `ieeg_linked_mastoids_256Hz.mat` (~5GB, download here: [https://1drv.ms/u/s!Ar6O6_m2VBtAj711FhG96G3eQuH_JA?e=3qeLKp](https://1drv.ms/u/s!Ar6O6_m2VBtAj711FhG96G3eQuH_JA?e=3qeLKp))  
 3. Some scripts in this repository depend on scripts that can be found here: [https://github.com/mormannlab/common_analysis_scripts](https://github.com/mormannlab/common_analysis_scripts)
 4. Plots in Figure 2C and 2D use the IOSR toolbox: [https://github.com/IoSR-Surrey/MatlabToolbox](https://github.com/IoSR-Surrey/MatlabToolbox)
 
