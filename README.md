@@ -7,19 +7,18 @@
 4. Plots in Figure 2C and 2D use the IOSR toolbox: [https://github.com/IoSR-Surrey/MatlabToolbox](https://github.com/IoSR-Surrey/MatlabToolbox)
 
 ## Paths and startup.m
-It is assumed that there is directory to the data, one for the scripts in this repo, and one for the abovementioned `common_analysis_scripts`. To adjust these paths to your situation, edit `startup.m` and run it once at startup of matlab.
+It is assumed that there is one directory with the data mentioned above (1. Sorted Spikes, 2. iEEG), one for the scripts in this repo, and one for the abovementioned `common_analysis_scripts`. To adjust these paths to your situation, edit `startup.m` and run it once at startup of matlab.
 
 ## Behavioral Results & Figure 1B
-1. `BehaviorAggregate.m` generates the file `reactiontimes_primed_control_category.mat`.
+1. `BehaviorAggregate.m` generates the file `reactiontimes_primed_control_category.mat` from `sessions.mat`.
 2. `BehaviorAnalysesAndPlots.m` outputs stats in the MATALB prompt and generate `Figure1B.png`.
 
 ## iEEG ERPs
-1. `ERPsPlotfigure1C.m` generates the figure `Figure1C.png`
+1. `ERPsPlotfigure1C.m` generates the figure `Figure1C.png` from `ieeg_linked_mastoids_256Hz.mat`.
 2. `ERPsLatencyAnalysesSITable1.m` prints output to terminal that was used for Supporting Information Table 1. 
 
 ## Single units tuning curves
-1. `Figure2ASUExamples.m` generates `.tif` files in the `su_examples` subdirectory to the main directory of this script folder. `ospr_su_example_3628_LPHC.tif` is used in Figure 2A. 
-2. `CalculateZscoresCondition.m` generates `zvals_condition.mat` 
+1. `Figure2ASUExamples.m` reads `sessions.mat` and generates `.tif` files in the `su_examples` subdirectory to the main directory of this script folder. `ospr_su_example_3628_LPHC.tif` is used in Figure 2A. 
 3. `CalculateTuningCurves.m` reads `zvals_condition.mat`and generates `tuningCurvesMin[N]ResponsesPerUnit.mat` where `N`is the minimun number of stimuli the unit responds to.
 3. `Figure2BPlotTuningCurves.m` generates  `Figure2BTuningCurvesMin[N]Resps.png` where `N`is the minimun number of stimuli the unit responds to. Note `N = 4` was used for Figure 2B.
 4. `PrepareTuningCurvesDataForSpss.m` generates `FiringRatesByRankCondition.csv`, which re-arranges the data in `tuningCurvesMin4ResponsesPerUnit.mat` long format to be further processed wiht SPSS or R for the ANOVA as specified in the manuscript.
