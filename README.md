@@ -18,13 +18,15 @@ It is assumed that there is one directory with the data mentioned above (1. Sort
 2. `ERPsLatencyAnalysesSITable1.m` prints output to terminal that was used for Supporting Information Table 1. 
 
 ## Single units tuning curves
-1. `Figure2ASUExamples.m` reads `sessions.mat` and generates `.tif` files in the `su_examples` subdirectory to the main directory of this script folder. `ospr_su_example_3628_LPHC.tif` is used in Figure 2A. 
-3. `CalculateTuningCurves.m` reads `zvals_condition.mat`and generates `tuningCurvesMin[N]ResponsesPerUnit.mat` where `N`is the minimun number of stimuli the unit responds to.
-3. `Figure2BPlotTuningCurves.m` generates  `Figure2BTuningCurvesMin[N]Resps.png` where `N`is the minimun number of stimuli the unit responds to. Note `N = 4` was used for Figure 2B.
-4. `PrepareTuningCurvesDataForSpss.m` generates `FiringRatesByRankCondition.csv`, which re-arranges the data in `tuningCurvesMin4ResponsesPerUnit.mat` long format to be further processed wiht SPSS or R for the ANOVA as specified in the manuscript.
-5. `firingRatesByRankCondition.sps` is an SPSS script file that does the Condition (primed, control) X Stimulus Rank (1,2,3,4) X Anatomical Region (AM, otherMTL) ANOVA on z-scored and raw firing rates reported in the main text and in Supplementary Table 2. It loads `FiringRatesByRankCondition.csv` and stores the output in SPSS viewer file (`FiringRatesByRankCondition.spv`).
+1. `CalcuateReponses.m` calculates the response criterion and determines whether a unit responds to a stimulus. 
+2. `Figure2ASUExamples.m` reads `sessions.mat` and generates `.tif` files in the `su_examples` subdirectory to the main directory of this script folder. `ospr_su_example_3628_LPHC.tif` is used in Figure 2A. 
+3. `CalculateTuningCurves.m` reads `zvals_condition.mat`and generates `tuningCurvesMin[N]ResponsesPerUnit.mat` where `N`is the minimun number of stimuli the unit responds to as defined in step 1 above.
+4. `Figure2BPlotTuningCurves.m` generates  `Figure2BTuningCurvesMin[N]Resps.png` where `N`is the minimun number of stimuli the unit responds to. Note `N = 4` was used for Figure 2B.
+5. `PrepareTuningCurvesDataForSpss.m` generates `FiringRatesByRankCondition.csv`, which re-arranges the data in `tuningCurvesMin4ResponsesPerUnit.mat` long format to be further processed wiht SPSS or R for the ANOVA as specified in the manuscript.
+6. `firingRatesByRankCondition.sps` is an SPSS script file that does the Condition (primed, control) X Stimulus Rank (1,2,3,4) X Anatomical Region (AM, otherMTL) ANOVA on z-scored and raw firing rates reported in the main text and in Supplementary Table 2. It loads `FiringRatesByRankCondition.csv` and stores the output in SPSS viewer file (`FiringRatesByRankCondition.spv`).
 
 ## Single units firing latencies and burst duration
-1. `CalculateFiringLatencies` runs p-burst on spiking data and stores `priming_latencies_min1responsesperunit.mat`.
-2. `Figure2CDLatencies.m` reads the above output and generates `Figure2C_BurstDuration_primed_vs_control_1_resps.png` and `Figure2D_Latency_primed_vs_control_1_resps.png` which contain statistical analyses and plots dipslayed in the Figures 2C and 2D. 
+1. `CalcuatePrimingResponses.m` calculates the response criterion separate for the 5 trials in the primed and the 5 trials in the control condition. 
+2. `CalculateFiringLatencies.m` runs p-burst on spiking data of units significantly responding in the primed and the control condition. Results are stored in `priming_latencies_min1responsesperunit.mat`.
+3. `Figure2CDLatencies.m` reads the above output and generates `Figure2C_BurstDuration_primed_vs_control_1_resps.png` and `Figure2D_Latency_primed_vs_control_1_resps.png` which contain statistical analyses and plots dipslayed in the Figures 2C and 2D. 
 
