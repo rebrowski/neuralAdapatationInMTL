@@ -14,18 +14,12 @@ segstartstop = [100 1000]; % for latency analyses
 doplot = false; % dont plot when calling response_latency;
 
 %% load responses
-cr = load('category_responses.mat');
+pr = load('priming_responses.bak.mat');
 
-% get units that significantly respond to four or more stimuli
-%respondingInBoth=(pr.consider_rs(:,:,1) & pr.consider_rs(:,:,2));
-%uidx =  sum(respondingInBoth, 2) >= minResponsesPerUnit;
-uidx = sum(cr.consider_rs,2) >= minResponsesPerUnit; % p/c combined;
-
-
-%disp(sprintf(['found %d repsonses that in units least %d responses ' ...
-%              'which are significant during both, primed & control condition'], sum(sum(respondingInBoth)), minResponsesPerUnit));
-%disp(sprintf(['these responses are found in  %d units, i.e., %.2f responses per unit on average '], ...
-%             sum(uidx), sum(sum(respondingInBoth))/sum(uidx)));
+% get units that significantly respond to four or more stimuli in both
+% conditions -> need to recalculate primign responses for this
+respondingInBoth=(pr.consider_rs(:,:,1) & pr.consider_rs(:,:,2));
+uidx =  sum(respondingInBoth, 2) >= minResponsesPerUnit;
 
 %% loop over units with responses in both and calculate latency
 nunits = sum(uidx);
@@ -47,9 +41,9 @@ for u = 1:nunits
     
     % get index to unit in sessions
     clusid = fuidx(u);    
-    sessid = cr.cluster_lookup.sessid(clusid);
-    channo = cr.cluster_lookup.channo(clusid);
-    classno = cr.cluster_lookup.clusid(clusid);
+    sessid = pr.cluster_lookup.sessid(clusid);
+    channo = pr.cluster_lookup.channo(clusid);
+    classno = pr.cluster_lookup.clusid(clusid);
     
     cherryno = find([sessions(sessid).cherries(:).channr] == channo & ...
         [sessions(sessid).cherries(:).classno] == classno);
@@ -57,9 +51,9 @@ for u = 1:nunits
     assert(numel(cherryno) == 1)
             
     % get stimuli indices
-    %ir = find(respondingInBoth(clusid, :));
-    ir = find(cr.consider_rs(clusid, :));
-    stimnames = cr.stim_lookup(ir);
+    ir = find(respondingInBoth(clusid, :));
+    %ir = find(pr.consider_rs(clusid, :));
+    stimnames = pr.stim_lookup(ir);
     
     % init output for p_burst
     BOB = [];
@@ -108,13 +102,13 @@ for u = 1:nunits
     end
     
     % save lookup vars
-    latlookup.region{u} = cr.cluster_lookup.regionname{clusid};
+    latlookup.region{u} = pr.cluster_lookup.regionname{clusid};
     latlookup.bslfr(u) = nanmedian(nanmedian([allbslfr{u,:,:}]));
 end
 
 disp(sprintf('took %.2f hours', toc/3600));
 
-save('priming_latencies.mat', ...
+save(sprintf('priming_latencies_min%d_resp.mat',minResponsesPerUnit), ...
      'aggregatelatencies', ...
      'allbslfr', ...
      'alllatencies', ...

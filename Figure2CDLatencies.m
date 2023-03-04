@@ -4,7 +4,8 @@ if ~exist('datadir', 'var')
     startup
 end
 
-load('priming_latencies.mat');
+%load('priming_latencies.bak.mat');
+load('priming_latencies_min1_resp.mat');
 
 regions(1).name = 'AM';
 regions(2).name = 'EC';
