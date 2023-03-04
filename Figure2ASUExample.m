@@ -23,7 +23,7 @@ for cid = 1%:numel(cellids)
 
     outfn = sprintf('%s%sospr_su_example_%d_%s', 'plots', filesep, cellid, cr.cluster_lookup{cellid,'sitename'}{1}); 
 
-    figh = figure('color', 'w', 'visible', 'off');
+    figh = figure('color', 'w', 'visible', 'on');
     figh.PaperUnits = 'inches';
     figh.PaperPosition = [0 0 7.4 6];
           
@@ -94,6 +94,10 @@ for cid = 1%:numel(cellids)
         plot([-1000 2000], [y(i) y(i)], '-k');
     end
     title('control', 'color', 'r');
+    axis on
+    xticks([-500, 0, 1000, 2000]);
+    xlabel('milliseconds');
+    yticks([]);
 
     %%% do the second row: primed condition
     subplot(1,3,2);
@@ -105,7 +109,11 @@ for cid = 1%:numel(cellids)
         plot([-1000 2000], [y(i) y(i)], '-k');
     end
     title('primed', 'color', 'b');
-    
+    axis on
+    xticks([-500, 0, 1000, 2000]);
+    xlabel('milliseconds');
+    yticks([]);
+
     %% plot the average zscores next to it
     subplot(1,3,3)
     set(gca, 'color', 'none')
