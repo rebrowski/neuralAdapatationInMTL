@@ -5,7 +5,7 @@ if ~exist('datadir', 'var')
 end
 
 if ~exist('sessions', 'var')
-    load([datadir, filsep, datafilename])
+    load([datadir, filesep, 'sessions.mat'])
 end
 
 load regions

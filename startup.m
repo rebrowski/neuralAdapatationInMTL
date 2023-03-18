@@ -9,9 +9,9 @@ if isunix
     datadir = '/media/treber/neuralAdaptationInMTL';
 end
 
-% isunix returns "true" also for mac, so
+% isunix returns "true" also for mac, so...
 if ismac
-    datadir = '~/projects/ospr/secondlevel/'; 
+    datadir = '~/OneDrive/data/neuralAdaptationInMTL/'; 
 end
 
 P_W_D = pwd;
