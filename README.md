@@ -36,6 +36,6 @@ It is assumed that there is one directory with the data mentioned above (1. Sort
 2. Supplementary Figure 2 is generated with `SupplementaryFigure2CorrRtsWithRankDifferencesInSUFiring.m`
 3. Supplementary Figure 3 is generated with `SupplementaryFigure3and6CorrRtsiEEGSU.m`
 4. Supplementary Figure 4 is generated with `SupplementaryFigure4RSAsPrimeTargetSimilarity.m`. This function also generates the `trialDataPrimeTargetSimilarity.csv`, which is then further analysed with SPSS (`trialDataPrimeTargetSimilarity.sps`) to assess whehter high vs. low-similarity primes affect firing of targets differently.
-5. Supplementary Figure 5 is generated with `SupplementaryFigure5PrestimulusActivity.m`
+5. Supplementary Figure 5 and 8 are generated with `SupplementaryFigure5And8PreStimulusSUActivity.m`
 6. Supplementary Figure 6 is generated with `SupplementaryFigure3and6CorrRtsiEEGSU.m`
 
