@@ -1,5 +1,4 @@
 %% adjust this to your situation>
-addpath(genpath('~/scripts/common_analysis_scripts')); %path to common_analysis_scripts: https://github.com/mormannlab/common_analysis_scripts
 addpath('~/scripts/neuralAdapatationInMTL'); % scripts in this repo: https://github.com/rebrowski/neuralAdapatationInMTL
 stimdir = '~/scripts/neuralAdapatationInMTL/stimuli/'; % folder with images contained in this repo
 
