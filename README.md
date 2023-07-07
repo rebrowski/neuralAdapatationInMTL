@@ -4,8 +4,7 @@
 1. Sorted Spiking and behavioral data are stored in `sessions.mat` (~5GB, download here: [https://1drv.ms/u/s!Ar6O6_m2VBtAj712lxxl7UDK_yXFog?e=UFAwCN](https://1drv.ms/u/s!Ar6O6_m2VBtAj712lxxl7UDK_yXFog?e=UFAwCN))
 2. Segmented intracranial EEG traces are stored in `ieeg_linked_mastoids_256Hz.mat` (~5GB, download here: [https://1drv.ms/u/s!Ar6O6_m2VBtAj711FhG96G3eQuH_JA?e=3qeLKp](https://1drv.ms/u/s!Ar6O6_m2VBtAj711FhG96G3eQuH_JA?e=3qeLKp))  
 3. Trialwise firing rates averaged over baseline and response period are stored in `zvals_trials_and_pre_trial.mat`(~2.5 GB, download here: [https://1drv.ms/u/s!Ar6O6_m2VBtAj75atM1RbsgBKP4Ohg?e=L5xdgF](https://1drv.ms/u/s!Ar6O6_m2VBtAj75atM1RbsgBKP4Ohg?e=L5xdgF)
-3. Some scripts in this repository depend on scripts that can be found here: [https://github.com/mormannlab/common_analysis_scripts](https://github.com/mormannlab/common_analysis_scripts)
-4. Plots in Figure 2C and 2D use the IOSR toolbox: [https://github.com/IoSR-Surrey/MatlabToolbox](https://github.com/IoSR-Surrey/MatlabToolbox)
+3. Plots in Figure 2C and 2D use the IOSR toolbox: [https://github.com/IoSR-Surrey/MatlabToolbox](https://github.com/IoSR-Surrey/MatlabToolbox)
 
 ## Paths and startup.m
 It is assumed that there is one directory with the data mentioned above (1. Sorted Spikes, 2. iEEG), one for the scripts in this repo, and one for the abovementioned `common_analysis_scripts`. To adjust these paths to your situation, edit `startup.m` and run it once at startup of matlab.
